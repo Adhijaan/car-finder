@@ -7,6 +7,7 @@ import { Button, Badge, Card, Field } from "@/components/ui";
 import { useCarfinder } from "@/lib/store";
 import type { SourcedValue, VehicleEvaluation, VehicleListing, VehicleResearch } from "@/lib/schemas";
 import { money, number, score } from "@/lib/utils";
+import { specificNextAction } from "@/lib/post-evaluation";
 
 type Stage = "input" | "review" | "research" | "result";
 const fields: { key: keyof VehicleListing; label: string; type?: "number" }[] = [
@@ -160,7 +161,7 @@ export default function EvaluatePage() {
           <div className="metric-grid"><div className="metric"><small>Purchase price</small><strong>{money(evaluation.ownership.purchasePrice)}</strong></div><div className="metric"><small>Est. resale</small><strong>{money(evaluation.ownership.resaleValue)}</strong></div><div className="metric"><small>Simplified monthly</small><strong>{money(evaluation.ownership.totalMonthly)}</strong></div></div>
           <div className="section-grid" style={{ marginTop: 24, marginBottom: 0 }}><div><h3>What works</h3><ul className="list-clean">{evaluation.advantages.map((item) => <li key={item}>{item}</li>)}</ul></div><div><h3>Risks</h3><ul className="list-clean">{evaluation.risks.map((item) => <li key={item}>{item}</li>)}</ul></div></div>
         </Card>
-        <Card style={{ marginTop: 20 }}><h2>Questions for the seller</h2><ul className="list-clean">{evaluation.sellerQuestions.map((item) => <li key={item}>{item}</li>)}</ul><div className="notice" style={{ marginBottom: 0 }}><strong>Next action:</strong> {evaluation.nextAction}</div></Card>
+        <Card style={{ marginTop: 20 }}><h2>Questions for the seller</h2><ul className="list-clean">{evaluation.sellerQuestions.map((item) => <li key={item}>{item}</li>)}</ul><div className="notice" style={{ marginBottom: 0 }}><strong>Next action:</strong> {specificNextAction(evaluation)}</div></Card>
       </div>
       <div>
         <Card><div className="score-ring" style={{ "--score-percent": `${evaluation.score * 10}%` } as React.CSSProperties}><strong>{score(evaluation.score)}<span>/10</span></strong></div>{evaluation.factors.map((factor) => <div className="factor" key={factor.name}><div className="factor-head"><span>{factor.name}</span><span>{score(factor.score)}/10</span></div><div className="meter"><span style={{ width: `${factor.score * 10}%` }} /></div><p>{factor.reason}</p></div>)}</Card>

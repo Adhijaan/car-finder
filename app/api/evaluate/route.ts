@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { buyerProfileSchema, evaluationSchema, researchSchema, vehicleListingSchema } from "@/lib/schemas";
 import { calculateOwnership } from "@/lib/evaluation";
+import { buildSpecificNextAction } from "@/lib/post-evaluation";
 import { demoSummary, evaluateFallback, vehicleLabel } from "@/lib/server/fallbacks";
 
 const requestSchema = z.object({ vehicle: vehicleListingSchema, profile: buyerProfileSchema, research: researchSchema });
@@ -66,7 +67,7 @@ export async function POST(request: Request) {
         ...fallback.missing.slice(0, 3).map((field) => `Can you confirm the ${field}?`),
         "Can an independent mechanic perform a pre-purchase inspection?",
       ],
-      nextAction: fallback.failures.length ? "Skip unless the hard requirement can be resolved." : score >= 7 ? "Request records and schedule an independent inspection." : "Resolve the missing information before spending time on an inspection.",
+      nextAction: buildSpecificNextAction({ failures: fallback.failures, missing: fallback.missing, risks: research.commonIssues, score }),
       hardRequirementFailures: fallback.failures, missingFields: fallback.missing, ownership, research,
       profileSnapshot: profile, engine, evaluatedAt: new Date().toISOString(),
     });

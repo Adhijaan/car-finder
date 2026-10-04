@@ -1,6 +1,6 @@
-# Carfinder
+# Which Whip
 
-Carfinder turns pasted used-car listings into buyer-specific, evidence-backed comparisons. It extracts listing facts, lets the buyer correct them, researches vehicle risks and resale, estimates simplified monthly ownership cost, and uses Jev to assign the final rating.
+Which Whip turns pasted used-car listings into buyer-specific, evidence-backed comparisons. It extracts listing facts, lets the buyer correct them, researches vehicle risks and resale, estimates simplified monthly ownership cost, and uses Jev to assign the final rating.
 
 ## Run locally
 

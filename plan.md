@@ -1,4 +1,4 @@
-### Carfinder
+### Which Whip
 
 I would like to create a platform to help my dad decide on a used car to buy. This is for a hackathon project
 Currently he sends my facebook marketplace urls of cars he thinks are "decent" and then asks me for my opinion.
@@ -63,7 +63,6 @@ Jev for deciding the ratings https://console.typesafe.ai/home
 - used after reasoning is done. this is the deciding part.
 
 Nextjs for full stack
-
 
 
 

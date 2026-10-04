@@ -13,7 +13,7 @@ export type VehicleMeta = {
   updatedAt: string;
 };
 
-type CarfinderState = {
+type WhichWhipState = {
   profile: BuyerProfile;
   vehicles: VehicleListing[];
   evaluations: VehicleEvaluation[];
@@ -25,7 +25,7 @@ type CarfinderState = {
   clearAll: () => void;
 };
 
-export const useCarfinder = create<CarfinderState>()(persist((set) => ({
+export const useWhichWhip = create<WhichWhipState>()(persist((set) => ({
   profile: defaultProfile,
   vehicles: [],
   evaluations: [],
@@ -56,11 +56,11 @@ export const useCarfinder = create<CarfinderState>()(persist((set) => ({
   })),
   clearAll: () => set({ profile: defaultProfile, vehicles: [], evaluations: [], vehicleMeta: {} }),
 }), {
-  name: "carfinder-v1",
+  name: "which-whip-v1",
   version: 2,
   migrate: (persistedState) => {
-    const previous = persistedState as Partial<CarfinderState>;
-    return { ...previous, vehicleMeta: previous.vehicleMeta ?? {} } as CarfinderState;
+    const previous = persistedState as Partial<WhichWhipState>;
+    return { ...previous, vehicleMeta: previous.vehicleMeta ?? {} } as WhichWhipState;
   },
 }));
 

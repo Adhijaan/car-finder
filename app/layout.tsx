@@ -3,7 +3,7 @@ import { AppShell } from "@/components/app-shell";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Carfinder — Intelligence for your next car",
+  title: "Which Whip — Intelligence for your next car",
   description: "Turn used-car listings into buyer-specific, evidence-backed comparisons.",
 };
 

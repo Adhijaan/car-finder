@@ -21,7 +21,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <div className="app-background-shade" />
     </div>
     <header className="topbar">
-      <Link className="brand" href="/" aria-label="Carfinder home"><span className="brand-mark"><img src="/assets/logo.webp" alt="" width="52" height="52" /></span><span>Carfinder</span></Link>
+      <Link className="brand" href="/" aria-label="Which Whip home"><span className="brand-mark"><img src="/assets/logo.webp" alt="" width="52" height="52" /></span><span>Which Whip</span></Link>
       <nav>{links.map(({ href, label, icon: Icon }) => <Link key={href} className={cn("nav-link", path.startsWith(href) && "nav-link-active")} href={href}><Icon size={17} />{label}</Link>)}</nav>
     </header>
     <main>{children}</main>

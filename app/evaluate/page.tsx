@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { AlertTriangle, ArrowLeft, ArrowRight, CheckCircle2, ExternalLink, FileSearch, Gauge, RotateCcw, Sparkles } from "lucide-react";
 import { Button, Badge, Card, Field } from "@/components/ui";
-import { useCarfinder } from "@/lib/store";
+import { useWhichWhip } from "@/lib/store";
 import type { SourcedValue, VehicleEvaluation, VehicleListing, VehicleResearch } from "@/lib/schemas";
 import { money, number, score } from "@/lib/utils";
 import { specificNextAction } from "@/lib/post-evaluation";
@@ -45,8 +45,8 @@ function Steps({ stage, available, onNavigate }: { stage: Stage; available: Set<
 }
 
 export default function EvaluatePage() {
-  const profile = useCarfinder((state) => state.profile);
-  const saveResult = useCarfinder((state) => state.saveResult);
+  const profile = useWhichWhip((state) => state.profile);
+  const saveResult = useWhichWhip((state) => state.saveResult);
   const [stage, setStage] = useState<Stage>("input");
   const [sourceUrl, setSourceUrl] = useState("");
   const [rawText, setRawText] = useState("");
@@ -114,7 +114,7 @@ export default function EvaluatePage() {
     {stage === "input" && <Card style={{ maxWidth: 850 }}>
       <h2>Paste a car listing</h2><p className="card-subtitle">Copy the title, price, description, and any visible specifications from Facebook Marketplace or another source.</p>
       <div className="form-grid" style={{ marginTop: 22 }}>
-        <Field label="Listing URL" hint="Optional. Saved as the original source; Carfinder does not require automated scraping."><input type="url" placeholder="https://facebook.com/marketplace/item/..." value={sourceUrl} onChange={(event) => setSourceUrl(event.target.value)} /></Field>
+        <Field label="Listing URL" hint="Optional. Saved as the original source; Which Whip does not require automated scraping."><input type="url" placeholder="https://facebook.com/marketplace/item/..." value={sourceUrl} onChange={(event) => setSourceUrl(event.target.value)} /></Field>
         <div />
         <div className="span-2"><Field label="Listing details" hint="Include at least 20 characters. Pasted text is treated as untrusted data, never as instructions."><textarea className="input-large" placeholder={'2019 Toyota RAV4 XLE\n$18,900 · 74,000 miles\nClean title, AWD...'} value={rawText} onChange={(event) => setRawText(event.target.value)} /></Field></div>
       </div>

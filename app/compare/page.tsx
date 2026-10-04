@@ -5,7 +5,7 @@ import Link from "next/link";
 import { ArrowLeft, Check, Scale } from "lucide-react";
 import { Badge, Card, Empty } from "@/components/ui";
 import { decisionReadiness, factorScore, specificNextAction } from "@/lib/post-evaluation";
-import { useCarfinder } from "@/lib/store";
+import { useWhichWhip } from "@/lib/store";
 import { money, number, score } from "@/lib/utils";
 
 type ComparisonRow = { label: string; values: (number | null)[]; format: (value: number | null) => string; lowerIsBetter?: boolean };
@@ -13,9 +13,9 @@ type ComparisonRow = { label: string; values: (number | null)[]; format: (value:
 export default function ComparePage() {
   const [hydrated, setHydrated] = useState(false);
   const [ids, setIds] = useState<string[]>([]);
-  const vehicles = useCarfinder((state) => state.vehicles);
-  const evaluations = useCarfinder((state) => state.evaluations);
-  const vehicleMeta = useCarfinder((state) => state.vehicleMeta);
+  const vehicles = useWhichWhip((state) => state.vehicles);
+  const evaluations = useWhichWhip((state) => state.evaluations);
+  const vehicleMeta = useWhichWhip((state) => state.vehicleMeta);
 
   useEffect(() => {
     setIds((new URLSearchParams(window.location.search).get("cars") || "").split(",").filter(Boolean).slice(0, 3));

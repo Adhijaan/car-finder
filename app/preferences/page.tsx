@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Check, Save } from "lucide-react";
 import { buyerProfileSchema, type BuyerProfile, type Priority } from "@/lib/schemas";
-import { useCarfinder } from "@/lib/store";
+import { useWhichWhip } from "@/lib/store";
 import { Button, Card, Field } from "@/components/ui";
 
 const bodyStyles = ["Sedan", "SUV", "Hatchback", "Wagon", "Minivan", "Truck", "Coupe"];
@@ -24,8 +24,8 @@ function nullableNumber(value: string) {
 }
 
 export default function PreferencesPage() {
-  const profile = useCarfinder((state) => state.profile);
-  const setProfile = useCarfinder((state) => state.setProfile);
+  const profile = useWhichWhip((state) => state.profile);
+  const setProfile = useWhichWhip((state) => state.setProfile);
   const [saved, setSaved] = useState(false);
   const { register, handleSubmit, watch, setValue, reset, formState: { errors } } = useForm<BuyerProfile>({ resolver: zodResolver(buyerProfileSchema), defaultValues: profile });
   useEffect(() => reset(profile), [profile, reset]);

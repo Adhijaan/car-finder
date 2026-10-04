@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Archive, ArchiveRestore, CarFront, ExternalLink, Heart, Search, Scale, Trash2 } from "lucide-react";
 import { Badge, Button, Card, Empty } from "@/components/ui";
 import { decisionReadiness, specificNextAction } from "@/lib/post-evaluation";
-import { profileIsStale, type ShortlistStatus, useCarfinder } from "@/lib/store";
+import { profileIsStale, type ShortlistStatus, useWhichWhip } from "@/lib/store";
 import { money, number, score } from "@/lib/utils";
 
 type SortOption = "score" | "newest" | "price" | "mileage" | "monthly";
@@ -21,12 +21,12 @@ export default function RankingsPage() {
   const [showArchived, setShowArchived] = useState(false);
   const [comparisonMode, setComparisonMode] = useState(false);
   const [selected, setSelected] = useState<string[]>([]);
-  const profile = useCarfinder((state) => state.profile);
-  const vehicles = useCarfinder((state) => state.vehicles);
-  const evaluations = useCarfinder((state) => state.evaluations);
-  const vehicleMeta = useCarfinder((state) => state.vehicleMeta);
-  const updateMeta = useCarfinder((state) => state.updateVehicleMeta);
-  const remove = useCarfinder((state) => state.removeResult);
+  const profile = useWhichWhip((state) => state.profile);
+  const vehicles = useWhichWhip((state) => state.vehicles);
+  const evaluations = useWhichWhip((state) => state.evaluations);
+  const vehicleMeta = useWhichWhip((state) => state.vehicleMeta);
+  const updateMeta = useWhichWhip((state) => state.updateVehicleMeta);
+  const remove = useWhichWhip((state) => state.removeResult);
   useEffect(() => setHydrated(true), []);
 
   const allRows = useMemo(() => evaluations.map((evaluation) => {
